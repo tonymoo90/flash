@@ -2,62 +2,39 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import FlashcardEditor from './FlashcardEditor';
 
-// Default flashcards
 const defaultFlashcards = [
-  { question: 'What is the capital of France?', answer: 'Paris' },
-  { question: 'What is the tallest mountain in the world?', answer: 'Mount Everest' },
-  { question: 'Who wrote "Hamlet"?', answer: 'William Shakespeare' },
-  { question: 'What is the speed of light?', answer: '299,792,458 meters per second' },
+  { question: 'What is React?', answer: 'A JavaScript library for building user interfaces' },
+  { question: 'What is JSX?', answer: 'A syntax extension for JavaScript' },
 ];
 
 function App() {
-  // Load flashcards from localStorage or use default
   const [flashcards, setFlashcards] = useState(() => {
     const storedFlashcards = localStorage.getItem('flashcards');
     return storedFlashcards ? JSON.parse(storedFlashcards) : defaultFlashcards;
   });
+  
+  const [editing, setEditing] = useState(false);
 
-  const [currentCard, setCurrentCard] = useState(0);
-  const [showAnswer, setShowAnswer] = useState(false);
-  const [editing, setEditing] = useState(false); // Toggle between editing and flashcard view
-
-  // Save flashcards to localStorage whenever they change
   useEffect(() => {
     localStorage.setItem('flashcards', JSON.stringify(flashcards));
   }, [flashcards]);
 
-  const handleCardClick = () => {
-    setShowAnswer(!showAnswer);
-  };
-
-  const nextCard = () => {
-    setCurrentCard((prev) => (prev + 1) % flashcards.length);
-    setShowAnswer(false);
-  };
-
-  const prevCard = () => {
-    setCurrentCard((prev) => (prev - 1 + flashcards.length) % flashcards.length);
-    setShowAnswer(false);
-  };
-
   return (
     <div className="App">
-      <button onClick={() => setEditing(!editing)}>
+      <button
+        onClick={() => setEditing(!editing)}
+        className="bg-blue-500 text-white px-4 py-2 rounded mb-4 hover:bg-blue-700"
+      >
         {editing ? 'Back to Flashcards' : 'Edit Flashcards'}
       </button>
 
       {editing ? (
         <FlashcardEditor flashcards={flashcards} setFlashcards={setFlashcards} />
       ) : (
-        <>
-          <div className="flashcard" onClick={handleCardClick}>
-            <h2>{showAnswer ? flashcards[currentCard].answer : flashcards[currentCard].question}</h2>
-          </div>
-          <div className="controls">
-            <button onClick={prevCard}>Previous</button>
-            <button onClick={nextCard}>Next</button>
-          </div>
-        </>
+        <div>
+          <h1 className="text-4xl mb-4">Flashcards</h1>
+          {/* Render flashcards normally */}
+        </div>
       )}
     </div>
   );
