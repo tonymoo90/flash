@@ -43,8 +43,9 @@ function FlashcardEditor({ flashcards, setFlashcards }) {
                   type="text"
                   value={card.question}
                   onChange={(e) => handleInputChange(index, 'question', e.target.value)}
-                  className="w-full p-2 border rounded"
+                  className="w-full p-2 border rounded resize-none"
                   placeholder="Edit question"
+                  style={{ width: '400px' }} // Increase width for better visibility
                 />
               </td>
               <td className="px-4 py-2">
@@ -52,8 +53,9 @@ function FlashcardEditor({ flashcards, setFlashcards }) {
                   type="text"
                   value={card.answer}
                   onChange={(e) => handleInputChange(index, 'answer', e.target.value)}
-                  className="w-full p-2 border rounded"
+                  className="w-full p-2 border rounded resize-none"
                   placeholder="Edit answer"
+                  style={{ width: '400px' }} // Increase width for better visibility
                 />
               </td>
               <td className="px-4 py-2">
@@ -78,6 +80,7 @@ function FlashcardEditor({ flashcards, setFlashcards }) {
             onChange={(e) => setNewQuestion(e.target.value)}
             className="flex-grow p-2 border rounded"
             placeholder="New question"
+            style={{ width: '400px' }} // Increase width for better visibility
           />
           <input
             type="text"
@@ -85,6 +88,7 @@ function FlashcardEditor({ flashcards, setFlashcards }) {
             onChange={(e) => setNewAnswer(e.target.value)}
             className="flex-grow p-2 border rounded"
             placeholder="New answer"
+            style={{ width: '400px' }} // Increase width for better visibility
           />
           <button
             onClick={addFlashcard}
