@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* General Layout */
 .App {
   font-family: 'Inter', sans-serif; /* Import a modern, clean Google Font */
