@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
-import FlashcardEditor from './FlashcardEditor'; // Import the new component
+import FlashcardEditor from './FlashcardEditor';
 
-const initialFlashcards = [
+// Default flashcards
+const defaultFlashcards = [
   { question: 'What is the capital of France?', answer: 'Paris' },
   { question: 'What is the tallest mountain in the world?', answer: 'Mount Everest' },
   { question: 'Who wrote "Hamlet"?', answer: 'William Shakespeare' },
@@ -10,10 +11,20 @@ const initialFlashcards = [
 ];
 
 function App() {
-  const [flashcards, setFlashcards] = useState(initialFlashcards); // Track flashcards in state
+  // Load flashcards from localStorage or use default
+  const [flashcards, setFlashcards] = useState(() => {
+    const storedFlashcards = localStorage.getItem('flashcards');
+    return storedFlashcards ? JSON.parse(storedFlashcards) : defaultFlashcards;
+  });
+
   const [currentCard, setCurrentCard] = useState(0);
   const [showAnswer, setShowAnswer] = useState(false);
-  const [editing, setEditing] = useState(false); // Toggle between views
+  const [editing, setEditing] = useState(false); // Toggle between editing and flashcard view
+
+  // Save flashcards to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem('flashcards', JSON.stringify(flashcards));
+  }, [flashcards]);
 
   const handleCardClick = () => {
     setShowAnswer(!showAnswer);
