@@ -1,0 +1,34 @@
+.App {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.flashcard {
+  width: 300px;
+  height: 200px;
+  border: 2px solid #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  font-size: 20px;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.3s;
+}
+
+.flashcard:hover {
+  transform: scale(1.05);
+}
+
+.controls {
+  margin-top: 20px;
+}
+
+button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
