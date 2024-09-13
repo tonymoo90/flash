@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 function FlashcardEditor({ flashcards, setFlashcards }) {
   const handleInputChange = (index, field, value) => {
