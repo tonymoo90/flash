@@ -122,6 +122,44 @@ button.toggle:hover {
   color: black; /* Text color should contrast with the white background */
   margin: 0; /* Remove any default margin */
   z-index: 3; /* Ensure it's on top of the pseudo-elements */
-  border: 2px solid red; /* Temporary border for debugging */
 }
+
+.flashcard-editor {
+  width: 100%;
+  max-width: 1200px; /* Set a max width to prevent it from getting too large on big screens */
+  margin: 0 auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+td, th {
+  padding: 8px 12px;
+  text-align: left;
+  border: 1px solid #ccc;
+  word-break: break-word; /* This ensures the text breaks onto the next line if it's too long */
+}
+
+input {
+  width: 100%;
+  box-sizing: border-box; /* Ensures padding is included in the width calculation */
+}
+
+@media (max-width: 768px) {
+  .flashcard-editor {
+    padding: 0 15px; /* Adds padding on small screens */
+  }
+
+  td, th {
+    font-size: 14px; /* Adjust font size on smaller screens */
+  }
+
+  button {
+    font-size: 14px;
+    padding: 8px 16px; /* Adjust button padding for smaller screens */
+  }
+}
+
 

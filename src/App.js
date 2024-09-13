@@ -50,7 +50,6 @@ function App() {
         <FlashcardEditor flashcards={flashcards} setFlashcards={setFlashcards} />
       ) : (
         <div>
-          <h1 className="text-4xl mb-4">Flashcards</h1>
           <div className="flashcard" onClick={toggleAnswer}>
             <h2>{showAnswer ? flashcards[currentCardIndex].answer : flashcards[currentCardIndex].question}</h2>
           </div>
