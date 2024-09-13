@@ -1,44 +1,47 @@
-/* Set the full-page style with centered content and black background */
+/* General Layout */
 .App {
-  font-family: Arial, sans-serif;
+  font-family: 'Inter', sans-serif; /* Import a modern, clean Google Font */
   margin: 0;
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #000; /* Black background for a sleek look */
+  background-color: #181818; /* Dark background for a premium feel */
 }
 
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Flashcard Styling */
 .flashcard {
-  width: 300px;
-  height: 200px;
-  border: none; /* Remove border for a clean look */
+  width: 350px;
+  height: 240px;
+  padding: 20px;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 20px; /* Softer corners for a modern look */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto;
-  font-size: 24px; /* Larger, more readable font */
   text-align: center;
-  cursor: pointer;
-  user-select: none;
-  background-color: white;
-  color: black;
-  position: relative;
+  font-size: 22px;
+  font-weight: 500; /* Make the font bold for better readability */
+  color: #333; /* Darker text for contrast */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 0 30px rgba(255, 255, 255, 0.15); /* Subtle glow effect */
-  border-radius: 10px; /* Rounded corners for a modern look */
+  position: relative;
   z-index: 2;
+  cursor: pointer;
 }
 
-.flashcard h2 {
-  font-size: 24px; /* Ensure the text is large */
-  color: black; /* Text color should contrast with the white background */
-  margin: 0; /* Remove any default margin */
-  z-index: 3; /* Ensure it's on top of the pseudo-elements */
-  border: 2px solid red; /* Temporary border for debugging */
+.flashcard:hover {
+  transform: translateY(-10px); /* Elevate the card on hover */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); /* Larger shadow on hover */
 }
 
+/* Stack effect */
 .flashcard::before,
 .flashcard::after {
   content: '';
@@ -47,10 +50,10 @@
   left: -15px;
   width: 100%;
   height: 100%;
-  border-radius: 10px;
-  background-color: white;
+  border-radius: 20px;
+  background-color: #ffffff;
   z-index: -1;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .flashcard::before {
@@ -63,44 +66,56 @@
   z-index: 0;
 }
 
-.flashcard:hover {
-  transform: translateY(-5px); /* Elevate the card on hover */
-  box-shadow: 0 0 40px rgba(255, 255, 255, 0.5); /* Enhanced glow effect on hover */
+/* Button Styling */
+button {
+  padding: 12px 25px;
+  font-size: 16px;
+  background-color: #007BFF;
+  color: #ffffff;
+  border: none;
+  border-radius: 30px;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 5px 10px rgba(0, 123, 255, 0.2); /* Soft shadow for buttons */
 }
 
-/* Center the buttons under the flashcard */
+button:hover {
+  background-color: #0056b3;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 15px rgba(0, 123, 255, 0.3);
+}
+
+button:active {
+  transform: translateY(2px);
+  box-shadow: 0 5px 10px rgba(0, 123, 255, 0.2);
+}
+
+/* Control Buttons Container */
 .controls {
   margin-top: 20px;
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 30px;
 }
 
-.input {
-  margin: 10px;
-  padding: 5px;
-  font-size: 16px;
-  width: 100%;
-  max-width: 400px;
-}
-
-/* Style buttons to be minimalist and Apple-like */
-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #ffffff;
-  border: none;
-  border-radius: 10px;
-  color: #000;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-}
-
-button:hover {
+/* Edit Button */
+button.toggle {
   background-color: #f0f0f0;
-  transform: translateY(-2px);
+  color: #333;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 25px;
+  margin-bottom: 15px;
+  box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
 }
 
-button:active {
-  transform: translateY(1px);
+button.toggle:hover {
+  background-color: #e0e0e0;
+}
+
+/* Flashcard Text */
+.flashcard h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #222;
 }
