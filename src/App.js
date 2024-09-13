@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
-import FlashcardView from './components/FlashcardView'; // Importing FlashcardView
-import ListView from './components/ListView'; // Importing ListView
 
-const initialFlashcards = [
+const flashcards = [
   { question: 'What is the capital of France?', answer: 'Paris' },
   { question: 'What is the tallest mountain in the world?', answer: 'Mount Everest' },
   { question: 'Who wrote "Hamlet"?', answer: 'William Shakespeare' },
@@ -11,32 +9,32 @@ const initialFlashcards = [
 ];
 
 function App() {
-  const [flashcards, setFlashcards] = useState(initialFlashcards);
-  const [viewMode, setViewMode] = useState('flashcards'); // 'flashcards' or 'list'
+  const [currentCard, setCurrentCard] = useState(0);
+  const [showAnswer, setShowAnswer] = useState(false);
 
-  const handleAddFlashcard = (newQuestion, newAnswer) => {
-    setFlashcards([...flashcards, { question: newQuestion, answer: newAnswer }]);
+  const handleCardClick = () => {
+    setShowAnswer(!showAnswer);
   };
 
-  const handleEditFlashcard = (index, updatedQuestion, updatedAnswer) => {
-    const updatedFlashcards = flashcards.map((card, i) =>
-      i === index ? { question: updatedQuestion, answer: updatedAnswer } : card
-    );
-    setFlashcards(updatedFlashcards);
+  const nextCard = () => {
+    setCurrentCard((prev) => (prev + 1) % flashcards.length);
+    setShowAnswer(false);
+  };
+
+  const prevCard = () => {
+    setCurrentCard((prev) => (prev - 1 + flashcards.length) % flashcards.length);
+    setShowAnswer(false);
   };
 
   return (
     <div className="App">
-      <div className="toggle-view">
-        <button onClick={() => setViewMode('flashcards')}>Flashcards View</button>
-        <button onClick={() => setViewMode('list')}>List View</button>
+      <div className="flashcard" onClick={handleCardClick}>
+        <h2>{showAnswer ? flashcards[currentCard].answer : flashcards[currentCard].question}</h2>
       </div>
-
-      {viewMode === 'flashcards' ? (
-        <FlashcardView flashcards={flashcards} />
-      ) : (
-        <ListView flashcards={flashcards} onEditFlashcard={handleEditFlashcard} />
-      )}
+      <div className="controls">
+        <button onClick={prevCard}>Previous</button>
+        <button onClick={nextCard}>Next</button>
+      </div>
     </div>
   );
 }
