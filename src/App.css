@@ -31,6 +31,14 @@
   z-index: 2;
 }
 
+.flashcard h2 {
+  font-size: 24px; /* Ensure the text is large */
+  color: black; /* Text color should contrast with the white background */
+  margin: 0; /* Remove any default margin */
+  z-index: 3; /* Ensure it's on top of the pseudo-elements */
+  border: 2px solid red; /* Temporary border for debugging */
+}
+
 .flashcard::before,
 .flashcard::after {
   content: '';
