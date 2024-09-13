@@ -23,10 +23,16 @@
   user-select: none;
   background-color: white;
   position: relative;
+  color: black; /* Ensures text is visible */
+  z-index: 2;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 0 30px rgba(255, 255, 255, 0.15); /* Subtle glow effect */
   border-radius: 10px; /* Rounded corners for a modern look */
-  z-index: 2;
+}
+
+.flashcard h2 {
+  z-index: 3; /* Ensures text is above the card shadows */
+  color: black; /* Text color should be visible on a white card */
 }
 
 .flashcard::before,
