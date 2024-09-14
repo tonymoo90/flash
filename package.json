@@ -8,18 +8,14 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.7",
-    "body-parser": "^1.20.3",
-    "cors": "^2.8.5",
-    "express": "^4.21.0",
-    "pg": "^8.12.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-scripts": "4.0.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build --openssl-legacy-provider",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -42,19 +38,7 @@
     ]
   },
   "devDependencies": {
-    "@babel/core": "^7.25.2",
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "tailwindcss": "^3.4.11"
-  },
-  "engines": {
-    "node": "16.x",
-    "npm": "8.x"
-  },
-  "babel": {
-    "presets": ["react-app"],
-    "plugins": [
-      "@babel/plugin-proposal-private-methods",
-      "@babel/plugin-proposal-private-property-in-object"
-    ]
   }
 }
