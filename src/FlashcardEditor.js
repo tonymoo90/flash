@@ -22,7 +22,7 @@ function FlashcardEditor({ flashcards, addFlashcard }) {
     };
 
     // Post new flashcard to the backend API using Axios
-    axios.post('http://localhost:5001/api/flashcards', newCard)
+    axios.post('https://flash-670fb56ffbd7.herokuapp.com/api/flashcards', newCard)
       .then(response => {
         addFlashcard(response.data);
         setNewQuestion('');
