@@ -46,6 +46,22 @@ app.post('/api/flashcards', async (req, res) => {
   }
 });
 
+app.put('/api/flashcards/:id/inactivate', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const result = await pool.query(
+      'UPDATE flashcards SET is_active = false WHERE id = $1 RETURNING *',
+      [id]
+    );
+    res.json(result.rows[0]); // Return the updated flashcard
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
