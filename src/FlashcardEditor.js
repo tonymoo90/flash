@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
-function FlashcardEditor({ flashcards, setFlashcards }) {
+function FlashcardEditor({ flashcards, setFlashcards, addFlashcard }) {
   const [newQuestion, setNewQuestion] = useState('');
   const [newAnswer, setNewAnswer] = useState('');
   const [error, setError] = useState('');
@@ -11,23 +12,36 @@ function FlashcardEditor({ flashcards, setFlashcards }) {
     setFlashcards(updatedFlashcards);
   };
 
-  const addFlashcard = () => {
+  const handleAddFlashcard = () => {
     if (newQuestion.trim() === '' || newAnswer.trim() === '') {
       setError('Both question and answer are required.');
       return;
     }
-    setFlashcards([
-      ...flashcards,
-      { question: newQuestion, answer: newAnswer }
-    ]);
-    setNewQuestion('');
-    setNewAnswer('');
-    setError(''); // Clear the error after successful addition
+
+    const newCard = {
+      question: newQuestion,
+      answer: newAnswer,
+    };
+
+    // Send the new flashcard to the backend API using Axios
+    axios.post('http://localhost:5001/api/flashcards', newCard)
+      .then(response => {
+        // Update local state with the new card
+        addFlashcard(response.data); // Calls the function passed from App.js
+        setNewQuestion('');
+        setNewAnswer('');
+        setError(''); // Clear the error after successful addition
+      })
+      .catch(err => {
+        console.error('Error adding flashcard:', err);
+        setError('Failed to add flashcard. Try again.');
+      });
   };
 
   const deleteFlashcard = (index) => {
     const updatedFlashcards = flashcards.filter((_, i) => i !== index);
     setFlashcards(updatedFlashcards);
+    // You can also add backend deletion logic if needed
   };
 
   return (
@@ -103,7 +117,7 @@ function FlashcardEditor({ flashcards, setFlashcards }) {
             rows={3}
           />
           <button
-            onClick={addFlashcard}
+            onClick={handleAddFlashcard}
             className="bg-blue-500 text-white px-6 py-3 rounded hover:bg-blue-700"
           >
             Add Card
