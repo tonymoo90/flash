@@ -10,14 +10,15 @@ const port = process.env.PORT || 5001;
 const corsOptions = {
   origin: [
     'https://extraordinary-hamster-30d45e.netlify.app',
-    'https://flash-670fb56ffbd7.herokuapp.com/',
-    'http://localhost:3000' // Keep this for local development
+    'https://flash-670fb56ffbd7.herokuapp.com',
+    'http://localhost:3000'
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
   optionsSuccessStatus: 204
 };
+
 app.use(cors(corsOptions));
 
 // Middleware to parse incoming requests with JSON payloads
@@ -29,6 +30,11 @@ const pool = new Pool({
   ssl: {
     rejectUnauthorized: false,
   },
+});
+
+// Add this near the top of your routes
+app.get('/', (req, res) => {
+  res.send('Backend is running');
 });
 
 // API Endpoint to get flashcards
