@@ -49,5 +49,12 @@
   "engines": {
     "node": "16.x",
     "npm": "8.x"
+  },
+  "babel": {
+    "presets": ["react-app"],
+    "plugins": [
+      "@babel/plugin-proposal-private-methods",
+      "@babel/plugin-proposal-private-property-in-object"
+    ]
   }
 }
