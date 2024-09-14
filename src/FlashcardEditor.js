@@ -5,6 +5,7 @@ function FlashcardEditor({ flashcards, setFlashcards, addFlashcard }) {
   const [newQuestion, setNewQuestion] = useState('');
   const [newAnswer, setNewAnswer] = useState('');
   const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false); // To prevent double submission
 
   const handleInputChange = (index, field, value) => {
     const updatedFlashcards = [...flashcards];
@@ -17,6 +18,9 @@ function FlashcardEditor({ flashcards, setFlashcards, addFlashcard }) {
       setError('Both question and answer are required.');
       return;
     }
+
+    if (isSubmitting) return; // Prevent double submission
+    setIsSubmitting(true);
 
     const newCard = {
       question: newQuestion,
@@ -35,6 +39,9 @@ function FlashcardEditor({ flashcards, setFlashcards, addFlashcard }) {
       .catch(err => {
         console.error('Error adding flashcard:', err);
         setError('Failed to add flashcard. Try again.');
+      })
+      .finally(() => {
+        setIsSubmitting(false); // Enable button again
       });
   };
 
@@ -78,54 +85,4 @@ function FlashcardEditor({ flashcards, setFlashcards, addFlashcard }) {
               <td className="px-4 py-2">
                 <textarea
                   value={card.answer}
-                  onChange={(e) => handleInputChange(index, 'answer', e.target.value)}
-                  className="w-full p-2 border rounded resize-none"
-                  placeholder="Edit answer"
-                  rows={3} // Adjust height for better visibility of large answers
-                />
-              </td>
-              <td className="px-4 py-2">
-                <button
-                  onClick={() => deleteFlashcard(index)}
-                  className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700"
-                >
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      <div className="mt-6">
-        <h3 className="text-xl mb-2">Add a New Flashcard</h3>
-        <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
-          <textarea
-            type="text"
-            value={newQuestion}
-            onChange={(e) => setNewQuestion(e.target.value)}
-            className="flex-grow p-2 border rounded"
-            placeholder="New question"
-            rows={3}
-          />
-          <textarea
-            type="text"
-            value={newAnswer}
-            onChange={(e) => setNewAnswer(e.target.value)}
-            className="flex-grow p-2 border rounded"
-            placeholder="New answer"
-            rows={3}
-          />
-          <button
-            onClick={handleAddFlashcard}
-            className="bg-blue-500 text-white px-6 py-3 rounded hover:bg-blue-700"
-          >
-            Add Card
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export default FlashcardEditor;
+                  onChange={(e) => handleInputChange(index, 'answer', e.target.v
