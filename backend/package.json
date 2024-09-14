@@ -12,7 +12,7 @@
     "start": "node server.js"
   },
   "engines": {
-    "node": "16.x",
-    "npm": "8.x"
+    "node": "20.x",
+    "npm": "10.x"
   }
 }
