@@ -7,8 +7,13 @@ const app = express();
 const port = process.env.PORT || 5001;
 
 app.use(bodyParser.json());
-app.use(cors());
 
+// CORS setup
+app.use(cors({
+  origin: 'https://extraordinary-hamster-30d45e.netlify.app', // Replace with your Netlify site URL
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true,
+}));
 
 // PostgreSQL connection using your connection string
 const pool = new Pool({
