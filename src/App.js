@@ -3,13 +3,6 @@ import './App.css';
 import FlashcardEditor from './FlashcardEditor';
 import axios from 'axios';
 
-const defaultFlashcards = [
-  { question: 'What is React?', answer: 'A JavaScript library for building user interfaces' },
-  { question: 'What is JSX?', answer: 'A syntax extension for JavaScript' },
-  { question: 'What is a component?', answer: 'A reusable piece of UI in React' },
-  { question: 'What is state in React?', answer: 'A way to manage data in a component' },
-];
-
 function App() {
   const [flashcards, setFlashcards] = useState([]);
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
@@ -18,20 +11,14 @@ function App() {
 
   // Fetch flashcards from the backend when the component mounts
   useEffect(() => {
-    axios.get('http://localhost:5001/api/flashcards') // Change to your backend URL
+    axios.get('https://your-heroku-app.herokuapp.com/api/flashcards') // Change to your Heroku URL
       .then(response => {
         setFlashcards(response.data);
       })
       .catch(error => {
         console.error('Error fetching flashcards:', error);
-        setFlashcards(defaultFlashcards); // Use default flashcards if there's an error
       });
   }, []);
-
-  // Update localStorage whenever flashcards are updated
-  useEffect(() => {
-    localStorage.setItem('flashcards', JSON.stringify(flashcards));
-  }, [flashcards]);
 
   const handleNextCard = () => {
     setShowAnswer(false);
@@ -47,11 +34,10 @@ function App() {
     setShowAnswer(!showAnswer);
   };
 
-  // Function to add a new flashcard through the backend
   const addFlashcard = (newCard) => {
-    axios.post('http://localhost:5001/api/flashcards', newCard)
+    axios.post('https://your-heroku-app.herokuapp.com/api/flashcards', newCard)
       .then(response => {
-        setFlashcards([...flashcards, response.data]); // Append the new flashcard to the state
+        setFlashcards([...flashcards, response.data]);
       })
       .catch(error => {
         console.error('Error adding flashcard:', error);
