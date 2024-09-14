@@ -3,13 +3,12 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const { Pool } = require('pg');
 
-// Create a new Express app
 const app = express();
-const port = process.env.PORT || 5001;  // Use Heroku's dynamically assigned port, or 5001 for local dev
+const port = process.env.PORT || 5001;
 
-// Middleware
 app.use(bodyParser.json());
 app.use(cors());
+
 
 // PostgreSQL connection using your connection string
 const pool = new Pool({

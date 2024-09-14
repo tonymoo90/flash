@@ -5,7 +5,7 @@ function FlashcardEditor({ flashcards, addFlashcard }) {
   const [newQuestion, setNewQuestion] = useState('');
   const [newAnswer, setNewAnswer] = useState('');
   const [error, setError] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false); // To prevent double submission
+  const [isSubmitting, setIsSubmitting] = useState(false); // Prevent double submissions
 
   const handleAddFlashcard = () => {
     if (newQuestion.trim() === '' || newAnswer.trim() === '') {
@@ -13,7 +13,7 @@ function FlashcardEditor({ flashcards, addFlashcard }) {
       return;
     }
 
-    if (isSubmitting) return; // Prevent double submission
+    if (isSubmitting) return; // Stop function execution if already submitting
     setIsSubmitting(true);
 
     const newCard = {
@@ -21,20 +21,20 @@ function FlashcardEditor({ flashcards, addFlashcard }) {
       answer: newAnswer,
     };
 
-    // Send the new flashcard to the backend API using Axios
+    // Post new flashcard to the backend API using Axios
     axios.post('http://localhost:5001/api/flashcards', newCard)
       .then(response => {
-        addFlashcard(response.data); // Calls the function passed from App.js
+        addFlashcard(response.data);
         setNewQuestion('');
         setNewAnswer('');
-        setError(''); // Clear the error after successful addition
+        setError(''); // Clear error message
       })
       .catch(err => {
         console.error('Error adding flashcard:', err);
         setError('Failed to add flashcard. Try again.');
       })
       .finally(() => {
-        setIsSubmitting(false); // Enable button again
+        setIsSubmitting(false); // Re-enable the button
       });
   };
 
@@ -42,10 +42,9 @@ function FlashcardEditor({ flashcards, addFlashcard }) {
     <div className="max-w-6xl mx-auto p-4">
       <h2 className="text-2xl font-bold mb-4">Edit Flashcards</h2>
 
-      {/* Display error message if necessary */}
       {error && (
-        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4" role="alert">
-          <span className="block sm:inline">{error}</span>
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+          {error}
         </div>
       )}
 
@@ -69,7 +68,7 @@ function FlashcardEditor({ flashcards, addFlashcard }) {
           <button
             onClick={handleAddFlashcard}
             className={`bg-blue-500 text-white px-6 py-3 rounded hover:bg-blue-700 ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
-            disabled={isSubmitting} // Disable button during submission
+            disabled={isSubmitting} // Disable the button while submitting
           >
             {isSubmitting ? 'Adding...' : 'Add Card'}
           </button>
@@ -80,3 +79,4 @@ function FlashcardEditor({ flashcards, addFlashcard }) {
 }
 
 export default FlashcardEditor;
+
