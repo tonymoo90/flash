@@ -8,7 +8,7 @@ const port = process.env.PORT || 5001;
 
 // CORS setup to allow requests from your Netlify app
 const corsOptions = {
-  origin: 'https://extraordinary-hamster-30d45e.netlify.app', // Your Netlify URL
+  origin: '*', // Your Netlify URL
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
