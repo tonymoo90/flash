@@ -6,9 +6,6 @@ const { Pool } = require('pg');
 const app = express();
 const port = process.env.PORT || 5001;
 
-// Middleware to parse incoming requests with JSON payloads
-app.use(bodyParser.json());
-
 // CORS setup to allow requests from your Netlify app
 const corsOptions = {
   origin: 'https://extraordinary-hamster-30d45e.netlify.app', // Your Netlify URL
@@ -18,6 +15,9 @@ const corsOptions = {
   optionsSuccessStatus: 204 // Some legacy browsers choke on 204
 };
 app.use(cors(corsOptions));
+
+// Middleware to parse incoming requests with JSON payloads
+app.use(bodyParser.json());
 
 // PostgreSQL connection using your connection string
 const pool = new Pool({
