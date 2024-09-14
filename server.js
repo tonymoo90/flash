@@ -5,17 +5,17 @@ const { Pool } = require('pg');
 
 // Create a new Express app
 const app = express();
-const port = 5001;
+const port = process.env.PORT || 5001;  // Use Heroku's dynamically assigned port, or 5001 for local dev
 
 // Middleware
 app.use(bodyParser.json());
 app.use(cors());
 
-// Use your full connection string URI here
+// PostgreSQL connection using your connection string
 const pool = new Pool({
   connectionString: 'postgres://ucbjjlpqocwrmu:d27656fd8b67e443c6c5abcd1a51379cb26c24d6a8ba322fdec3833c9203d68d@ec2-34-236-100-103.compute-1.amazonaws.com:5432/d548t01krr7l7e',
   ssl: {
-    rejectUnauthorized: false, // Needed for some cloud-based services like Heroku
+    rejectUnauthorized: false,  // Needed for connecting to cloud-hosted PostgreSQL
   },
 });
 
