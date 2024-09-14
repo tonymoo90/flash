@@ -11,7 +11,7 @@ function App() {
 
   // Fetch flashcards from the backend when the component mounts
   useEffect(() => {
-    axios.get('http://localhost:5001/api/flashcards') // Make sure this is your backend URL
+    axios.get('https://flash-670fb56ffbd7.herokuapp.com/api/flashcards') // Make sure this is your backend URL
       .then(response => {
         setFlashcards(response.data);
       })
