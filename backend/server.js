@@ -8,11 +8,15 @@ const port = process.env.PORT || 5001;
 
 // CORS setup to allow requests from your Netlify app
 const corsOptions = {
-  origin: ['https://extraordinary-hamster-30d45e.netlify.app', 'https://your-heroku-app.herokuapp.com'], // Your Netlify URL
+  origin: [
+    'https://extraordinary-hamster-30d45e.netlify.app',
+    'https://flash-670fb56ffbd7.herokuapp.com/',
+    'http://localhost:3000' // Keep this for local development
+  ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
-  optionsSuccessStatus: 204 // Some legacy browsers choke on 204
+  optionsSuccessStatus: 204
 };
 app.use(cors(corsOptions));
 
@@ -21,9 +25,9 @@ app.use(bodyParser.json());
 
 // PostgreSQL connection using your connection string
 const pool = new Pool({
-  connectionString: 'postgres://ucbjjlpqocwrmu:d27656fd8b67e443c6c5abcd1a51379cb26c24d6a8ba322fdec3833c9203d68d@ec2-34-236-100-103.compute-1.amazonaws.com:5432/d548t01krr7l7e',
+  connectionString: process.env.DATABASE_URL,
   ssl: {
-    rejectUnauthorized: false,  // Necessary for cloud-hosted PostgreSQL (like Heroku)
+    rejectUnauthorized: false,
   },
 });
 
@@ -52,11 +56,6 @@ app.post('/api/flashcards', async (req, res) => {
     console.error('Error adding flashcard:', err.message);
     res.status(500).json({ error: 'Server error' });
   }
-});
-
-// Fallback route for undefined routes
-app.use((req, res, next) => {
-  res.status(404).json({ error: 'Route not found' });
 });
 
 // Start the server
